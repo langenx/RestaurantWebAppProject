@@ -46,12 +46,12 @@ namespace RestaurantWebAppProject.Data
                 );
 
             modelBuilder.Entity<Ingredient>().HasData(
-                new Ingredient { IngredientID = 1, Name = "Beef"},
-                new Ingredient { IngredientID = 2, Name = "Chicken" },
-                new Ingredient { IngredientID = 3, Name = "Fish" },
-                new Ingredient { IngredientID = 4, Name = "Tortilla" },
-                new Ingredient { IngredientID = 5, Name = "Lettuce" },
-                new Ingredient { IngredientID = 6, Name = "Tomato" }
+                new Ingredient { IngredientId = 1, Name = "Beef"},
+                new Ingredient { IngredientId = 2, Name = "Chicken" },
+                new Ingredient { IngredientId = 3, Name = "Fish" },
+                new Ingredient { IngredientId = 4, Name = "Tortilla" },
+                new Ingredient { IngredientId = 5, Name = "Lettuce" },
+                new Ingredient { IngredientId = 6, Name = "Tomato" }
                 );
 
             modelBuilder.Entity<Product>().HasData(
