@@ -22,7 +22,7 @@ namespace RestaurantWebAppProject.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            //composite key of productid and ingredientid
+            // Define composite key and relationships for ProductIngredient
             modelBuilder.Entity<ProductIngredient>()
                 .HasKey(pi => new { pi.ProductId, pi.IngredientId });
 
@@ -34,25 +34,26 @@ namespace RestaurantWebAppProject.Data
             modelBuilder.Entity<ProductIngredient>()
                 .HasOne(pi => pi.Ingredient)
                 .WithMany(i => i.ProductIngredients)
-                .HasForeignKey(pi => pi.ProductId);
+                .HasForeignKey(pi => pi.IngredientId);
 
-            //przykładowe dane
+            //Seed Data
             modelBuilder.Entity<Category>().HasData(
-                new Category { CategoryId = 1, Name = "Appetizer"},
-                new Category { CategoryId = 2, Name = "Entree" },
-                new Category { CategoryId = 3, Name = "Side Dish" },
-                new Category { CategoryId = 4, Name = "Dessert" },
-                new Category { CategoryId = 5, Name = "Beverage" }
-                );
+               new Category { CategoryId = 1, Name = "Appetizer" },
+               new Category { CategoryId = 2, Name = "Entree" },
+               new Category { CategoryId = 3, Name = "Side Dish" },
+               new Category { CategoryId = 4, Name = "Dessert" },
+               new Category { CategoryId = 5, Name = "Beverage" }
+           );
 
             modelBuilder.Entity<Ingredient>().HasData(
-                new Ingredient { IngredientId = 1, Name = "Beef"},
-                new Ingredient { IngredientId = 2, Name = "Chicken" },
-                new Ingredient { IngredientId = 3, Name = "Fish" },
-                new Ingredient { IngredientId = 4, Name = "Tortilla" },
-                new Ingredient { IngredientId = 5, Name = "Lettuce" },
-                new Ingredient { IngredientId = 6, Name = "Tomato" }
-                );
+              //add mexican restaurant ingredients here
+              new Ingredient { IngredientId = 1, Name = "Beef" },
+              new Ingredient { IngredientId = 2, Name = "Chicken" },
+              new Ingredient { IngredientId = 3, Name = "Fish" },
+              new Ingredient { IngredientId = 4, Name = "Tortilla" },
+              new Ingredient { IngredientId = 5, Name = "Lettuce" },
+              new Ingredient { IngredientId = 6, Name = "Tomato" }
+          );
 
             modelBuilder.Entity<Product>().HasData(
 
@@ -86,9 +87,8 @@ namespace RestaurantWebAppProject.Data
                 }
                 );
 
-            //które proddukty wyżej mają jakie składniki
             modelBuilder.Entity<ProductIngredient>().HasData(
-                new ProductIngredient { ProductId = 1, IngredientId = 1 }, //na przykład beef taco ma beef, tortilla, lettuce, tomato
+                new ProductIngredient { ProductId = 1, IngredientId = 1 },
                 new ProductIngredient { ProductId = 1, IngredientId = 4 },
                 new ProductIngredient { ProductId = 1, IngredientId = 5 },
                 new ProductIngredient { ProductId = 1, IngredientId = 6 },
@@ -101,7 +101,6 @@ namespace RestaurantWebAppProject.Data
                 new ProductIngredient { ProductId = 3, IngredientId = 5 },
                 new ProductIngredient { ProductId = 3, IngredientId = 6 }
                 );
-
         }
 
     }

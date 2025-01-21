@@ -16,12 +16,25 @@ namespace RestaurantWebAppProject.Controllers
         {
             return View(await ingredients.GetAllAsync());
         }
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id) //asynchroniczna metoda która pobiera informacje o Ingredient na podstawie id, zwraca widok Details, wykorzystuje mechanizm eager loading (includes) do pobrania danych powiązanych 
         {
-
-
-
-            return View(await ingredients.GetByIdAsync(id, new QueryOptions<Ingredient>() {Includes ="ProductIngredients.Product"}));
+            return View(await ingredients.GetByIdAsync(id, new QueryOptions<Ingredient>() { Includes = "ProductIngredients.Product" }));
+        }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken] //security token
+        public async Task<IActionResult> Create([Bind("IngredientId, Name")] Ingredient ingredient)
+        {
+            if (ModelState.IsValid)
+            {
+                await ingredients.AddAsync(ingredient);
+                return RedirectToAction("Index");
+            }
+            return View(ingredient);
         }
     }
 }

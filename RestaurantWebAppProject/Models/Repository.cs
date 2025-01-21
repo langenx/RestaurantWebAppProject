@@ -16,9 +16,10 @@ namespace RestaurantWebAppProject.Models
             _context = context;
             _dbSet = context.Set<T>();
         }
-        public Task AddAsync(T entity)
+        public async Task AddAsync(T entity)
         {
-            throw new NotImplementedException();
+            await _dbSet.AddAsync(entity); //dodawanie entity do tabeli
+            await _context.SaveChangesAsync(); //zapisywanie zmian
         }
 
         public Task DeleteAsync(int id)
