@@ -119,5 +119,21 @@ namespace RestaurantWebAppProject.Controllers
             return RedirectToAction("Index", "Product");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await products.DeleteAsync(id);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                ModelState.AddModelError("", "Product not found.");
+                return RedirectToAction("Index");
+            }
+
+        }
+
     }
 }
