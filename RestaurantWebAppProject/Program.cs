@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RestaurantWebAppProject.Data;
+using RestaurantWebAppProject.Middleware;
 using RestaurantWebAppProject.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,7 +40,7 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseMiddleware<SessionTrackingMiddleware>(); //customowe middleware
 app.UseRouting();
 app.UseSession();
 app.UseAuthorization();
